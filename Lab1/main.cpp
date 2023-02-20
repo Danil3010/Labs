@@ -6,10 +6,10 @@ int main() {
 	bool run_again = true;
 
 	while (run_again) {
-	string a;
+	string String;
 	cout << "Enter a string of numeric values: ";
-	cin >> a;
-	MyString s(a);
+	cin >> String;
+	MyString s(String);
 	if (!s.Check()) {
 		cout << "Error: string contains non-digit characters." << endl;
 		cout << "" << endl;
