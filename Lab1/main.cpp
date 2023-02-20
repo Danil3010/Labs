@@ -24,7 +24,7 @@ int main() {
 	cout << "Length of string after removing 5: " << s.length() << endl;
 	s.length2();
 
-	cout << ""<< endl;
+	cout << " "<< endl;
 
 	cout << "Continue? (Yes/No): ";
 	string answer;
