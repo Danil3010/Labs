@@ -1,0 +1,6 @@
+﻿  MyString.cpp
+C:\Users\danil\source\repos\Lab2\Lab2\MyString.cpp(17,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\danil\source\repos\Lab2\Lab2\MyString.cpp(27,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  main.cpp
+  Generating Code...
+  Lab2.vcxproj -> C:\Users\danil\source\repos\Lab2\x64\Debug\Lab2.exe
