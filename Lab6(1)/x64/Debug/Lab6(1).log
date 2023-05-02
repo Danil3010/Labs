@@ -1,0 +1,4 @@
+﻿  main.cpp
+C:\Users\danil\source\repos\Lab6(1)\Lab6(1)\main.cpp(23,1): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\danil\source\repos\Lab6(1)\Lab6(1)\main.cpp(54,1): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Lab6(1).vcxproj -> C:\Users\danil\source\repos\Lab6(1)\x64\Debug\Lab6(1).exe
