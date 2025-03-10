@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Перевірка усного рахунку</title>
+    <link rel="stylesheet" href="main.css" />
+</head>
+
+<style>
+    body {
+        background-color: lightgoldenrodyellow;
+    }
+
+    .center {
+        text-align: center;
+        margin: auto;
+    }
+
+    #keyboard {
+        text-align: center;
+        margin: auto;
+        border: 2px solid;
+    }
+
+    input[type=button] {
+        padding: 10px;
+        font-size: 18px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+    }
+
+    #d1 { background-color: lightblue; }
+    #d2 { background-color: lightgreen; }
+    #d3 { background-color: lightcoral; }
+    #d4 { background-color: lightyellow; }
+    #plus { background-color: orange; }
+    #minus { background-color: violet; }
+    #multiply { background-color: cyan; }
+    #ok { background-color: limegreen; }
+    #clear { background-color: red; }
+</style>
+
+<script>
+    var max_value, operand1 = 0, operand2 = 0, result = 0, flag = 0, sign = "+", input = "";
+    
+    function set_sign(x) {
+        sign = x;
+    }
+
+    function f_operand() {
+        return Math.floor(Math.random() * max_value);
+    }
+
+    function s_operand() {
+        return Math.floor(Math.random() * max_value);
+    }
+
+    function input_sign(x) {
+        if (x == 10) {
+            let correct = false;
+            if (sign == "+") correct = (operand1 + operand2 == parseInt(input));
+            if (sign == "-") correct = (operand1 - operand2 == parseInt(input));
+            if (sign == "*") correct = (operand1 * operand2 == parseInt(input));
+            
+            document.forms["test"].r0.value = correct ? "Вірно!" : "Спробуй ще!";
+            input = "";
+            return;
+        }
+        input += x;
+        document.forms["test"].result.value = input;
+    }
+
+    function main_calc() {
+        operand1 = f_operand();
+        operand2 = s_operand();
+        document.forms["test"].op1.value = operand1;
+        document.forms["test"].op2.value = operand2;
+        document.forms["test"].s_sign.value = sign;
+        document.forms["test"].result.value = "";
+        document.forms["test"].r0.value = "???";
+    }
+
+    function clear_all() {
+        operand1 = operand2 = result = 0;
+        input = "";
+        document.forms["test"].op1.value = "";
+        document.forms["test"].op2.value = "";
+        document.forms["test"].s_sign.value = "";
+        document.forms["test"].result.value = "";
+        document.forms["test"].r0.value = "???";
+    }
+</script>
+
+<body>
+    <h1 class="center">Математичний тест</h1>
+    <hr />
+    <form name="test">
+        <table class="center">
+            <tr>
+                <td><input id='d1' type=button value="0-10" onClick="max_value=10"></td>
+                <td><input id='d2' type=button value="0-20" onClick="max_value=20"></td>
+                <td><input id='d3' type=button value="0-100" onClick="max_value=100"></td>
+                <td><input id='d4' type=button value="20+11" onClick="max_value=31"></td>
+                <td><input id="plus" type=button value="+" onClick='set_sign("+")'></td>
+                <td><input id="minus" type=button value="-" onClick='set_sign("-")'></td>
+                <td><input id="multiply" type=button value="*" onClick='set_sign("*")'></td>
+            </tr>
+        </table>
+        <hr>
+        <table class="center">
+            <tr>
+                <td><input id="op1" size="3" maxlength="3"></td>
+                <td><input id="s_sign" size="1" maxlength="1"></td>
+                <td><input id="op2" size="3" maxlength="3"></td>
+                <td>=</td>
+                <td><input id="result" size="4" maxlength="4"></td>
+                <td><input id="award" type=button value="?" onClick="main_calc()"></td>
+                <td><input id="r0" value="???"></td>
+            </tr>
+        </table>
+        <hr />
+        <table id="keyboard">
+            <tr>
+                <td><input type=button value="1" onClick='input_sign("1")'></td>
+                <td><input type=button value="2" onClick='input_sign("2")'></td>
+                <td><input type=button value="3" onClick='input_sign("3")'></td>
+            </tr>
+            <tr>
+                <td><input type=button value="4" onClick='input_sign("4")'></td>
+                <td><input type=button value="5" onClick='input_sign("5")'></td>
+                <td><input type=button value="6" onClick='input_sign("6")'></td>
+            </tr>
+            <tr>
+                <td><input type=button value="7" onClick='input_sign("7")'></td>
+                <td><input type=button value="8" onClick='input_sign("8")'></td>
+                <td><input type=button value="9" onClick='input_sign("9")'></td>
+            </tr>
+            <tr>
+                <td><input type=button value="0" onClick='input_sign("0")'></td>
+                <td colspan="2"><input id="ok" type=button value="OK" onClick='input_sign("10")'></td>
+            </tr>
+        </table>
+        <hr />
+        <table class="center">
+            <tr>
+                <td colspan="7"><input id="clear" type=button value="Очистити" onClick="clear_all()"></td>
+            </tr>
+        </table>
+    </form>
+    <hr />
+</body>
+
+</html>

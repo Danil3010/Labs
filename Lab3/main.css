@@ -1,0 +1,35 @@
+body {
+    background-color: aliceblue;
+}
+
+.center {
+    text-align: center;
+    margin: auto;
+}
+
+#keyboard {
+    text-align: center;
+    margin: auto;
+    border: 2px solid;
+}
+
+.num-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    margin: 5px;
+    border-radius: 5px;
+    border: none;
+    color: white;
+}
+
+.num-btn:nth-child(1) { background-color: red; }
+.num-btn:nth-child(2) { background-color: blue; }
+.num-btn:nth-child(3) { background-color: green; }
+.num-btn:nth-child(4) { background-color: orange; }
+.num-btn:nth-child(5) { background-color: purple; }
+.num-btn:nth-child(6) { background-color: brown; }
+.num-btn:nth-child(7) { background-color: pink; }
+.num-btn:nth-child(8) { background-color: cyan; }
+.num-btn:nth-child(9) { background-color: lime; }
+.num-btn:nth-child(10) { background-color: gray; }
