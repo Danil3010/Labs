@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма паспортних даних</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            color: #333;
+        }
+        label {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 5px;
+            display: block;
+        }
+        input[type="text"], input[type="file"], button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0 15px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .message {
+            font-size: 16px;
+            color: #4CAF50;
+            display: none;
+            text-align: center;
+        }
+        .error {
+            color: #e74c3c;
+        }
+
+        .result-container {
+            margin-top: 30px;
+        }
+        pre {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Форма для введення паспортних даних</h1>
+
+    <form id="passportForm">
+        <label for="surname">Прізвище:</label>
+        <input type="text" id="surname" name="surname" required>
+        <label for="name">Ім’я:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="patronymic">По батькові:</label>
+        <input type="text" id="patronymic" name="patronymic" required>
+        <label for="address">Адреса:</label>
+        <input type="text" id="address" name="address" required>
+        <label for="idNumber">Ідентифікаційний номер:</label>
+        <input type="text" id="idNumber" name="idNumber" required>
+        <label for="photo">Фото паспорта:</label>
+        <input type="file" id="photo" name="photo" accept="image/*">
+
+        <button type="button" onclick="submitForm()">Відправити</button>
+    </form>
+    <div class="message" id="successMessage">
+        Дані успішно збережено в файл JSON!
+    </div>
+    <div class="message error" id="errorMessage">
+        Будь ласка, заповніть всі поля форми.
+    </div>
+    <div class="result-container">
+        <h2>Записані дані:</h2>
+        <pre id="storedData"></pre>
+    </div>
+    <h2>Завантажити JSON файл:</h2>
+    <input type="file" id="jsonFile" onchange="readJsonFile(this)">
+    <button type="button" onclick="deleteData()">Видалити дані</button>
+</div>
+
+<script>
+    function submitForm() {
+        const surname = document.getElementById("surname").value;
+        const name = document.getElementById("name").value;
+        const patronymic = document.getElementById("patronymic").value;
+        const address = document.getElementById("address").value;
+        const idNumber = document.getElementById("idNumber").value;
+        if (!surname || !name || !patronymic || !address || !idNumber) {
+            document.getElementById("errorMessage").style.display = "block";
+            document.getElementById("successMessage").style.display = "none";
+            return;
+        }
+        document.getElementById("errorMessage").style.display = "none";
+
+        const formData = {
+            surname: surname,
+            name: name,
+            patronymic: patronymic,
+            address: address,
+            idNumber: idNumber
+        };
+
+        const jsonData = JSON.stringify(formData, null, 2);
+        downloadFile(jsonData, "passport-data.json", "application/json");
+        document.getElementById("storedData").textContent = jsonData;
+        document.getElementById("successMessage").style.display = "block";
+    }
+    function downloadFile(content, fileName, contentType) {
+        const blob = new Blob([content], { type: contentType });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = fileName;
+        link.click();
+    }
+    function readJsonFile(inputElement) {
+        const file = inputElement.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const jsonData = JSON.parse(event.target.result);
+                document.getElementById("surname").value = jsonData.surname || '';
+                document.getElementById("name").value = jsonData.name || '';
+                document.getElementById("patronymic").value = jsonData.patronymic || '';
+                document.getElementById("address").value = jsonData.address || '';
+                document.getElementById("idNumber").value = jsonData.idNumber || '';
+            };
+            reader.readAsText(file);
+        }
+    }
+    function deleteData() {
+        document.getElementById("passportForm").reset();
+        document.getElementById("storedData").textContent = '';
+        document.getElementById("successMessage").style.display = "none";
+        document.getElementById("errorMessage").style.display = "none";
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:xforms="http://www.w3.org/2002/xforms"
+      xmlns:ev="http://www.w3.org/2001/xml-events">
+  <head>
+    <title>Форма паспортних даних</title>
+    <xforms:model>
+      <xforms:instance id="passport-data">
+        <passport>
+          <surname/>
+          <name/>
+          <patronymic/>
+          <address/>
+          <idNumber/>
+          <photo/>
+        </passport>
+      </xforms:instance>
+      <xforms:submission id="submit" action="/submit" method="post"/>
+    </xforms:model>
+  </head>
+  <body>
+    <h1>Форма для введення паспортних даних</h1>
+    <xforms:group>
+      <xforms:label for="surname">Прізвище:</xforms:label>
+      <xforms:input ref="passport/surname" id="surname"/><br/>
+      <xforms:label for="name">Ім’я:</xforms:label>
+      <xforms:input ref="passport/name" id="name"/><br/>
+      <xforms:label for="patronymic">По батькові:</xforms:label>
+      <xforms:input ref="passport/patronymic" id="patronymic"/><br/>
+      <xforms:label for="address">Адреса:</xforms:label>
+      <xforms:input ref="passport/address" id="address"/><br/>
+      <xforms:label for="idNumber">Ідентифікаційний номер:</xforms:label>
+      <xforms:input ref="passport/idNumber" id="idNumber"/><br/>
+      <xforms:label for="photo">Фото паспорта:</xforms:label>
+      <xforms:upload ref="passport/photo" id="photo" mediatype="image/*"/><br/>
+      <xforms:submit submission="submit">
+        <xforms:label>Відправити</xforms:label>
+      </xforms:submit>
+    </xforms:group>
+  </body>
+</html>
